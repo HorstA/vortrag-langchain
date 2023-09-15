@@ -71,3 +71,8 @@ def getNamespaces():
         pinecone.Index(os.environ["PINECONE_INDEX"]).describe_index_stats().namespaces
     )
     return myList
+
+
+def generateChatAnswer(messages):
+    # ask Dr KI
+    return {"role": "test", "content": "See what happens!"}
