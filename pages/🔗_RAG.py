@@ -5,8 +5,8 @@ from lib.pinetools import generateChatAnswer, getNamespaces
 if "namespaces" not in st.session_state:
     st.session_state["namespaces"] = getNamespaces()
 
-
-st.title("💬 Ragtime!")
+st.set_page_config(page_title="💬 RAG")
+st.title("Ragtime!")
 st.caption("🚀 LangChain Chat mit Embedding")
 if "messages" not in st.session_state:
     st.session_state["messages"] = [

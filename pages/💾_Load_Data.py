@@ -25,6 +25,8 @@ if "namespaces" not in st.session_state:
 
 
 # page
+st.set_page_config(page_title="💾 Load data")
+
 tabNew, tabDelete = st.tabs(tabs=["Neu", "Löschen"])
 
 with tabNew:
