@@ -1,4 +1,5 @@
-streamlit
 langchain
+pinecone-client
 pypdf
 python-dotenv
+streamlit

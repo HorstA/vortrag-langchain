@@ -7,6 +7,9 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Pinecone
+from langchain import OpenAI
+from langchain.chat_models import ChatOpenAI
+from langchain.chains import RetrievalQA
 
 load_dotenv()
 
@@ -73,6 +76,25 @@ def getNamespaces():
     return myList
 
 
-def generateChatAnswer(messages):
-    # ask Dr KI
-    return {"role": "test", "content": "See what happens!"}
+def generateChatAnswer(question, namespace, messages):
+    initPinecone()
+    embeddings = OpenAIEmbeddings(openai_api_key=os.environ["OPENAI_API_KEY"])
+    docsearch = Pinecone.from_existing_index(
+        index_name=os.environ["PINECONE_INDEX"],
+        embedding=embeddings,
+        namespace=namespace,
+    )
+
+    llm = ChatOpenAI(openai_api_key=os.environ["OPENAI_API_KEY"], model="gpt-4")
+    qa = RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=docsearch.as_retriever(),
+        return_source_documents=True,
+    )
+    result = qa({"query": question})
+
+    print(result["result"])
+    print(result["source_documents"])
+
+    return result["result"]
