@@ -85,7 +85,7 @@ def generateChatAnswer(question, namespace, messages):
         namespace=namespace,
     )
 
-    llm = ChatOpenAI(openai_api_key=os.environ["OPENAI_API_KEY"], model="gpt-4")
+    llm = ChatOpenAI(openai_api_key=os.environ["OPENAI_API_KEY"], model="gpt-3.5-turbo")
     qa = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",

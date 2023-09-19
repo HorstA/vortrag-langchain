@@ -15,7 +15,7 @@ if "messages" not in st.session_state:
 
 
 namespace_file = st.selectbox(
-    "Bitte wählen Sie ein Dokument",
+    "Bitte wähle ein Dokument",
     options=st.session_state["namespaces"],
     key="selectboxDelete",
 )

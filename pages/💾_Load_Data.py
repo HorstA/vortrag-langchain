@@ -1,10 +1,10 @@
 import streamlit as st
 from lib.pinetools import getNamespaces, deleteFile, uploadPdfFile
 
+st.set_page_config(page_title="💾 Load data")
+
 
 # functions
-
-
 def handleButtonClick():
     st.toast(f"Verarbeite {newFile}")
     docSearch = uploadPdfFile(newFile)
@@ -25,8 +25,6 @@ if "namespaces" not in st.session_state:
 
 
 # page
-st.set_page_config(page_title="💾 Load data")
-
 tabNew, tabDelete = st.tabs(tabs=["Neu", "Löschen"])
 
 with tabNew:
@@ -42,10 +40,10 @@ with tabNew:
 with tabDelete:
     st.markdown("### 🗑 Dateien aus Datenbank entfernen")
     st.warning(
-        "Achtung: Daten werden entgültig aus der Datenbank entfert. Sie können diesen Schritt nicht rückgängig machen."
+        "Achtung: Daten werden entgültig aus der Datenbank entfert. Du kannst diesen Schritt nicht rückgängig machen."
     )
     optFileDelete = st.selectbox(
-        "Bitte wählen Sie ein Dokument",
+        "Bitte wähle ein Dokument",
         options=st.session_state["namespaces"],
         key="selectboxDelete",
     )
